@@ -3,6 +3,7 @@ namespace ShoppingCart.Shoppingcart
     using Microsoft.AspNetCore.Mvc;
     using ShoppingCart;
 
+    [ApiController]
     [Route("/shoppingcart")]
     public class ShoppingCartController : ControllerBase
     {
@@ -14,9 +15,13 @@ namespace ShoppingCart.Shoppingcart
 	}
 
 	// Declares the endpoint for handling requests to /shoppingcart/{userid}
+	[HttpGet("")]
+	public string Index() =>
+	    "Shopping Cart Microservice is working ...";
+
+	// Declares the endpoint for handling requests to /shoppingcart/{userid}
 	[HttpGet("{userId:int}")]
 	public ShoppingCart Get(int userId) =>
 	    this.shoppingCartStore.Get(userId);
-
     }
 }
