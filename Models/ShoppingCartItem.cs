@@ -1,4 +1,4 @@
-namespace ShoppingCart.ShoppingCart;
+namespace ShoppingCart.Models;
 
 public record ShoppingCartItem(
 	int ProductCatalogueId,

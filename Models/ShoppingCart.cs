@@ -1,4 +1,4 @@
-namespace ShoppingCart.ShoppingCart;
+namespace ShoppingCart.Models;
 
 using System.Collections.Generic;
 using System.Linq;

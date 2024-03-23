@@ -1,5 +1,4 @@
-// ShoppingCart domain model
-namespace ShoppingCart.ShoppingCart;
+namespace ShoppingCart.Models;
 public class ShoppingCartStore : IShoppingCartStore
 {
     private static readonly Dictionary<int, ShoppingCart>

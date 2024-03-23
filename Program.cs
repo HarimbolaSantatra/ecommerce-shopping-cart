@@ -1,6 +1,6 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-builder.Services.AddScoped<ShoppingCart.ShoppingCart.IShoppingCartStore, ShoppingCart.ShoppingCart.ShoppingCartStore>();
+builder.Services.AddScoped<ShoppingCart.Models.IShoppingCartStore, ShoppingCart.Models.ShoppingCartStore>();
 
 // Using Scrutor for DI
 // builder.Services.Scan(selector =>
