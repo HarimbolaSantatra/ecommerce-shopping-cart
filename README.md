@@ -6,17 +6,19 @@ Master repo is [here](https://github.com/HarimbolaSantatra/gammerlgaard-shopping
 ### Branch
 | Branch | Description |
 | --- | --- |
-| master | Main code from the book |
-| book/dummyInterface | Add a a dummy implementation of the IShoppingCartStore interface |
 | main | My implementation |
-| dev/addItem | **Implementation**: ShoppingCartController.AddItem |
+| book/dummyInterface | Add a a dummy implementation of the IShoppingCartStore interface |
+| dev/removeItem | **Implementaton**: remove item from a shoppingCart |
 
 > [!IMPORTANT]
 > .NET Core do not use `startup.cs` anymore, which is still used in the book; instead, I use `Program.cs` on the *master* branch.
 
 
-### TODO
-- [ ]
+### Overview of the Shopping Cart microservice
+Microservices:
+- Shopping Cart
+- Product catalog
+- Price Calculation
 
 ## Resources:
 - [ Gammerlgaard's book ][1]
