@@ -18,6 +18,11 @@ public class ShoppingCart
 	this.UserId = userId;
     }
 
+    public void AddItem(ShoppingCartItem shoppingCartItem)
+    {
+	this.items.Add(shoppingCartItem);
+    }
+
     public void AddItems(IEnumerable<ShoppingCartItem> shoppingCartItems)
     {
 	foreach (var item in shoppingCartItems)

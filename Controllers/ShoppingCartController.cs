@@ -25,8 +25,18 @@ public class ShoppingCartController : ControllerBase
 	this.shoppingCartStore.Get(userId);
 
     // Add item to a user shopping cart
+    [HttpPost("{userId:int}/item")]
+    public void AddItem(int userId, ShoppingCartItem shoppingCartItem)
+    {
+	// Get the user's ShoppingCart
+	ShoppingCart shoppingCart = Get(userId);
+	// Update the ShoppingCart
+	shoppingCart.AddItem(shoppingCartItem);
+    }
+
+    // Add item to a user shopping cart
     [HttpPost("{userId:int}/items")]
-    public void AddItem(int userId, IEnumerable<ShoppingCartItem> shoppingCartItems)
+    public void AddItems(int userId, IEnumerable<ShoppingCartItem> shoppingCartItems)
     {
 	// Get the user's ShoppingCart
 	ShoppingCart shoppingCart = Get(userId);

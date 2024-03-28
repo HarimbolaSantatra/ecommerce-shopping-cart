@@ -8,7 +8,8 @@ Master repo is [here](https://github.com/HarimbolaSantatra/gammerlgaard-shopping
 | --- | --- |
 | master | Main code from the book |
 | book/dummyInterface | Add a a dummy implementation of the IShoppingCartStore interface |
-| dev/master | My implementation |
+| main | My implementation |
+| dev/addItem | **Implementation**: ShoppingCartController.AddItem |
 
 > [!IMPORTANT]
 > .NET Core do not use `startup.cs` anymore, which is still used in the book; instead, I use `Program.cs` on the *master* branch.
