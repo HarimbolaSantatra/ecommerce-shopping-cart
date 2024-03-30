@@ -2,16 +2,21 @@ namespace ShoppingCart.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Models;
+using Microsoft.Extensions.Logging;
+
 
 [ApiController]
 [Route("/shoppingcart")]
 public class ShoppingCartController : ControllerBase
 {
     private readonly IShoppingCartStore shoppingCartStore;
+    
+    private readonly ILogger _logger;
 
-    public ShoppingCartController(IShoppingCartStore shoppingCartStore)
+    public ShoppingCartController(IShoppingCartStore shoppingCartStore, ILogger<ShoppingCartController> logger)
     {
 	this.shoppingCartStore = shoppingCartStore;
+	this._logger = logger;
     }
 
     // Declares the endpoint for handling requests to /shoppingcart/{userid}
@@ -28,6 +33,7 @@ public class ShoppingCartController : ControllerBase
     [HttpPost("{userId:int}/item")]
     public void AddItem(int userId, ShoppingCartItem shoppingCartItem)
     {
+	this._logger.LogInformation($"Add item for user {userId}");
 	// Get the user's ShoppingCart
 	ShoppingCart shoppingCart = GetUserCart(userId);
 	// Update the ShoppingCart
