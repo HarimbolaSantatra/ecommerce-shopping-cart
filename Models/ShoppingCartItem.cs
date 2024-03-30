@@ -4,7 +4,7 @@ public record ShoppingCartItem(
 	int ProductCatalogueId,
 	string ProductName,
 	string Description,
-	Money Price)
+	int Price)
 {
 
     public virtual bool Equals(ShoppingCartItem? obj) =>
