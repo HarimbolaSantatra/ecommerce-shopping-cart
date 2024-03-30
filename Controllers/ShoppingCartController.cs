@@ -26,8 +26,9 @@ public class ShoppingCartController : ControllerBase
 
     // Add one item to a user shopping cart
     [HttpPost("{userId:int}/item")]
-    public void AddItem(int userId, ShoppingCartItem shoppingCartItem)
+    public void AddItem(int userId, [FromBody] ShoppingCartItem shoppingCartItem)
     {
+	Console.WriteLine("userId is " + userId);
 	// Get the user's ShoppingCart
 	ShoppingCart shoppingCart = GetUserCart(userId);
 	// Update the ShoppingCart
