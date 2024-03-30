@@ -33,7 +33,16 @@ public class ShoppingCartController : ControllerBase
     [HttpPost("{userId:int}/item")]
     public void AddItem(int userId, ShoppingCartItem shoppingCartItem)
     {
-	this._logger.LogInformation($"Add item for user {userId}");
+
+	// Logging
+	this._logger.LogInformation($@"Add item for user {userId}
+ShoppingCartItem parameters:
+    ProductCatalogueId: {shoppingCartItem.ProductCatalogueId},
+    ProductName: {shoppingCartItem.ProductName},
+    Description: {shoppingCartItem.Description},
+    Price: {shoppingCartItem.Price},
+		");
+
 	// Get the user's ShoppingCart
 	ShoppingCart shoppingCart = GetUserCart(userId);
 	// Update the ShoppingCart
