@@ -13,7 +13,6 @@ public class ShoppingCartController
 {
 
     private readonly AppDbContext _context;
-    private MyLogger logger = new MyLogger("debug");
 
     public ShoppingCartController(AppDbContext context)
     {
@@ -48,19 +47,16 @@ public class ShoppingCartController
     {
 	const String unity = "ShoppingCartController.GetUserCart";
 	var res = new Dictionary<string, object>();
-	logger.Debug(unity, "==== GetUserCart begin ====");
 
 	var userCart = _context.Carts
 	    .SingleOrDefault(cart => cart.UserId == userId);
 	// Check if result is empty
 	if (userCart == null)
 	{
-	    logger.Debug(unity, $"Cart for user {userId} is empty");
 	    res.Add("status", "empty");
 	}
 	else
 	{
-	    logger.Debug(unity, $"Cart for user {userId} exists");
 	    res.Add("status", "exist");
 	    res.Add("cart", _context.Carts);
 	}
@@ -87,7 +83,6 @@ public class ShoppingCartController
 	var cart = _context.Carts.ToList().SingleOrDefault(cart => cart.Id == cartItem.cartId);
 	if (cart == null)
 	{
-	    logger.Error("ShoppingCartController.AddItems", "Cart doesn't exist");
 	    res.Add("operation", "inexistant_cart");
 	    return new JsonResult(res);
 	}
@@ -96,19 +91,16 @@ public class ShoppingCartController
 	IEnumerable<Item> items = _context.Items.ToList().Where(item => cartItem.itemsId.Contains(item.Id));
 	if (items == null)
 	{
-	    logger.Error("ShoppingCartController.AddItems", "Item doesn't exist");
 	    res.Add("operation", "inexistant_item");
 	    return new JsonResult(res);
 	}
 
-	logger.Debug("ShoppingCartController.AddItem", "Adding the Item to the cart ...");
 
 	foreach (Item item in items)
 	{
 	    cart.Items.Add(item);
 	}
 	_context.SaveChanges();
-	logger.Debug("ShoppingCartController.AddItem", "Update done.");
 
 	// TODO: check if the user exist
 
@@ -133,7 +125,6 @@ public class ShoppingCartController
 	const String unity = "ShoppingCartController.GetItems";
 	IEnumerable<Item> items;
 	Dictionary<String, object> res = new Dictionary<string, object>();
-	logger.Debug(unity, "Getting all Items objects ...");
 	items = _context.Items.ToList<Item>().Where(item => item.CartId == cartId);
 	res.Add("items", items);
 	return new JsonResult(res);
@@ -152,7 +143,6 @@ public class ShoppingCartController
 	const String unity = "ShoppingCartController.GetCarts";
 	IEnumerable<Cart> carts;
 	Dictionary<String, object> res = new Dictionary<string, object>();
-	logger.Debug(unity, "Getting all Cart objects ...");
 	carts = _context.Carts;
 	res.Add("carts", carts);
 	return new JsonResult(res);
@@ -175,16 +165,13 @@ public class ShoppingCartController
 	var carts = _context.Carts;
 	if (carts == null)
 	{
-	    logger.Error("ShoppingCartController.AddCart", "Cart is null");
 	    res.Add("operation", "inexistant_cart");
 	    return new JsonResult(res);
 	}
 
-	logger.Debug("ShoppingCartController.AddCart", "Adding the Cart to the database ...");
 
 	carts.Add(cart);
 	_context.SaveChanges();
-	logger.Debug("ShoppingCartController.AddCart", "Update done.");
 
 	res.Add("cart", cart.Serialize());
 

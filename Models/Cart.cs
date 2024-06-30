@@ -22,7 +22,6 @@ public class Cart
     public int UserId { get; set; }
     public User User { get; set; } = null;
 
-    private MyLogger logger = new MyLogger("debug");
 
     /// <summary>
     /// Method checkIfEmpty check if a list of Cart is empty or not
