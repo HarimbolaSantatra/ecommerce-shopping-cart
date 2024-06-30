@@ -1,9 +1,10 @@
+using ShoppingCart.Models;
+using Microsoft.EntityFrameworkCore;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-builder.Services.AddScoped<ShoppingCart.Models.IShoppingCartStore, ShoppingCart.Models.ShoppingCartStore>();
 
-// Add logger
-builder.Services.AddScoped<ILogger<ShoppingCart.Controllers.ShoppingCartController>, Logger<ShoppingCart.Controllers.ShoppingCartController>>();
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

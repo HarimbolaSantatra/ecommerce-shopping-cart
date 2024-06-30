@@ -1,3 +1,6 @@
 - major refac
 - Setup dev environment with docker
 - rename database to cart_microservice
+- dev/addItem : controller AddItems - add item for a user's shoppingCart
+- logger: refac logger functionality
+- item microservices: separate from the shopping cart
