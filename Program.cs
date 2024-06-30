@@ -6,6 +6,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>();
 
+builder.Services.AddSingleton<IAccountClient, AccountClient>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

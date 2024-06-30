@@ -8,15 +8,17 @@ using ShoppingCart.Utils;
 using System.Linq;
 
 [ApiController]
-[Route("/shoppingcart")]
+[Route("/")]
 public class ShoppingCartController
 {
 
     private readonly AppDbContext _context;
+    public IAccountClient _accountClient;
 
-    public ShoppingCartController(AppDbContext context)
+    public ShoppingCartController(AppDbContext context, IAccountClient accountClient)
     {
 	_context = context;
+	_accountClient = accountClient;
     }
 
 
@@ -27,17 +29,18 @@ public class ShoppingCartController
     /// Test JSON status
     /// </returns>
     [HttpGet("")]
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
 	var res = new Dictionary<String, String>();
 	res.Add("status", "ShoppingCart microservice is working!");
+	string account_test = await _accountClient.GetAccount(1);
+	res.Add("account_test", account_test);
 	return new JsonResult(res);
     }
 
 
     /// <summary>
     /// Get a user's cart
-    /// <param name="userId">ID of the user</param>
     /// </summary>
     /// <returns>
     /// The Cart object
@@ -45,8 +48,10 @@ public class ShoppingCartController
     [HttpGet("{userId:int}")]
     public ActionResult GetUserCart(int userId)
     {
-	const String unity = "ShoppingCartController.GetUserCart";
 	var res = new Dictionary<string, object>();
+
+	// TODO: check if the user exist
+
 
 	var userCart = _context.Carts
 	    .SingleOrDefault(cart => cart.UserId == userId);
@@ -63,94 +68,8 @@ public class ShoppingCartController
 	return new JsonResult(res);
     }
 
-
     /// <summary>
-    /// Add a list of Item to the cart
-    /// </summary>
-    /// <param name="cartItem">Represent a cart and an item</param>
-    /// <returns>
-    /// The JSON representation of the created Item object
-    /// </returns>
-    [HttpPost("item")]
-    public ActionResult AddItems(CartItem cartItem)
-    {
-
-	//TODO: make the controller async
-
-	Dictionary<string, object> res = new Dictionary<string, object>();
-
-	// Get the cart
-	var cart = _context.Carts.ToList().SingleOrDefault(cart => cart.Id == cartItem.cartId);
-	if (cart == null)
-	{
-	    res.Add("operation", "inexistant_cart");
-	    return new JsonResult(res);
-	}
-
-	// Get the item
-	IEnumerable<Item> items = _context.Items.ToList().Where(item => cartItem.itemsId.Contains(item.Id));
-	if (items == null)
-	{
-	    res.Add("operation", "inexistant_item");
-	    return new JsonResult(res);
-	}
-
-
-	foreach (Item item in items)
-	{
-	    cart.Items.Add(item);
-	}
-	_context.SaveChanges();
-
-	// TODO: check if the user exist
-
-	res.Add("items", cart.Serialize());
-
-	// Set status: Update or Create
-	res.Add("operation", "updated");
-
-	return new JsonResult(res);
-    }
-
-
-    /// <summary>
-    /// Get all items inside a cart
-    /// </summary>
-    /// <returns>
-    /// A JSON containing a list of Item
-    /// </returns>
-    [HttpGet("items")]
-    public ActionResult GetItems(int cartId)
-    {
-	const String unity = "ShoppingCartController.GetItems";
-	IEnumerable<Item> items;
-	Dictionary<String, object> res = new Dictionary<string, object>();
-	items = _context.Items.ToList<Item>().Where(item => item.CartId == cartId);
-	res.Add("items", items);
-	return new JsonResult(res);
-    }
-
-
-    /// <summary>
-    /// Get all carts
-    /// </summary>
-    /// <returns>
-    /// A JSON containing a list of Cart.
-    /// </returns>
-    [HttpGet("cart")]
-    public ActionResult GetCarts()
-    {
-	const String unity = "ShoppingCartController.GetCarts";
-	IEnumerable<Cart> carts;
-	Dictionary<String, object> res = new Dictionary<string, object>();
-	carts = _context.Carts;
-	res.Add("carts", carts);
-	return new JsonResult(res);
-    }
-
-
-    /// <summary>
-    /// Add a cart to the database
+    /// Add a cart for a user
     /// </summary>
     /// <returns>
     /// The JSON representation of the created Cart object
@@ -163,21 +82,15 @@ public class ShoppingCartController
 
 	// Get the cart
 	var carts = _context.Carts;
-	if (carts == null)
-	{
-	    res.Add("operation", "inexistant_cart");
-	    return new JsonResult(res);
-	}
-
-
 	carts.Add(cart);
 	_context.SaveChanges();
 
-	res.Add("cart", cart.Serialize());
 
-	// Set status: Update or Create
 	res.Add("operation", "updated");
+	res.Add("cart", cart.Serialize());
 
 	return new JsonResult(res);
     }
+
+
 }

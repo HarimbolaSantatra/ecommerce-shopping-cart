@@ -20,8 +20,6 @@ public class Cart
 
     // for one-to-one relationship
     public int UserId { get; set; }
-    public User User { get; set; } = null;
-
 
     /// <summary>
     /// Method checkIfEmpty check if a list of Cart is empty or not

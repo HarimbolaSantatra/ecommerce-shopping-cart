@@ -3,7 +3,6 @@ ShoppingCart services for the [ecommerce microservices][1].
 Master repo is [here](https://github.com/HarimbolaSantatra/gammerlgaard-shopping-cart).
 
 ## SETUP DEVELOPMENT ENVIRONMENT
-### Docker
 ### Dotnet
 To simply run it on dotnet CLI: `dotnet run`.
 
@@ -22,13 +21,6 @@ Endpoint | HTTP Method | Description | Method name
 `<userId>/items` | post | Add multiple items to a user cart | AddItems
 
 ### Body data
-#### AddItem
-```json
-{
-    "Id": 3,
-    "Username": "Gal"
-}
-```
 
 ### About the project
 - Database: mariadb
