@@ -1,5 +1,7 @@
 namespace ShoppingCart.Models;
-using System.Net.Http;
+
+using Microsoft.AspNetCore.Mvc;
+
 public class AccountClient : IAccountClient {
 
     public readonly HttpClient _client = new HttpClient();
@@ -10,19 +12,23 @@ public class AccountClient : IAccountClient {
     {}
 
     // Test if the 'Account' service is working
-    public async Task<string> TestService()
+    public async Task<ObjectResult> TestService()
     {
-	string jsonResponse;
+	string response;
+	int statusCode;
 	try
 	{
-	    HttpResponseMessage response= await _client.GetAsync($"{BaseUrl}/status");
-	    jsonResponse = await response.Content.ReadAsStringAsync();
+	    response = await _client.GetStringAsync($"{BaseUrl}/status");
+	    statusCode = 200;
 	}
-	catch
+	catch (HttpRequestException e)
 	{
-	    jsonResponse = "Account services not ready!";
+	    response = "Account services not ready!";
+	    statusCode = 500;
 	}
-	return jsonResponse;
+	ObjectResult res = new ObjectResult(response);
+	res.StatusCode = statusCode;
+	return res;
     }
 
     public async Task<string> GetAccount(int userId)

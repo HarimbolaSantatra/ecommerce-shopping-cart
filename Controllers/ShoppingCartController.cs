@@ -29,13 +29,17 @@ public class ShoppingCartController
     /// Test JSON status
     /// </returns>
     [HttpGet("")]
-    public async Task<ActionResult> Index()
+    public async Task<JsonResult> Index()
     {
 	var res = new Dictionary<String, String>();
 	res.Add("status", "ShoppingCart microservice is working!");
-	string account_test = await _accountClient.TestService();
-	res.Add("account_test", account_test);
-	return new JsonResult(res);
+	ObjectResult objectResult = await _accountClient.TestService();
+	res.Add("account_test", objectResult.Value.ToString());
+
+	// Create the JsonResult
+	JsonResult jsonResult = new JsonResult(res);
+	jsonResult.StatusCode = objectResult.StatusCode;
+	return jsonResult;
     }
 
 
