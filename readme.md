@@ -3,7 +3,6 @@ ShoppingCart services for the [ecommerce microservices][1].
 Master repo is [here](https://github.com/HarimbolaSantatra/gammerlgaard-shopping-cart).
 
 ## SETUP DEVELOPMENT ENVIRONMENT
-### Docker
 ### Dotnet
 To simply run it on dotnet CLI: `dotnet run`.
 
@@ -16,19 +15,13 @@ Visit the [master repo][1] to view instructions.
 Here's a list of all exposed endpoint of the API. The base URL is `shoppingcart`.
 Endpoint | HTTP Method | Description | Method name
 --- | --- | --- | ---
-`/` | get | Test if the service is working | Index
+`/` | get | Test if the Cart service and the others services it depends on are working | Index
+`/status` | get | Test if the service is working but return a plain string | GetStatus
 `/<userId>` | get | Get a user's cart | GetUserCart
 `<userId>/item` | post | Add on item to a user's cart | AddItem
 `<userId>/items` | post | Add multiple items to a user cart | AddItems
 
 ### Body data
-#### AddItem
-```json
-{
-    "Id": 3,
-    "Username": "Gal"
-}
-```
 
 ### About the project
 - Database: mariadb

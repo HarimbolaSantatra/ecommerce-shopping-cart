@@ -29,9 +29,6 @@ namespace ShoppingCart.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
                     b.ToTable("Cart");
                 });
 
@@ -64,32 +61,6 @@ namespace ShoppingCart.Migrations
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("ShoppingCart.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("ShoppingCart.Models.Cart", b =>
-                {
-                    b.HasOne("ShoppingCart.Models.User", "User")
-                        .WithOne("cart")
-                        .HasForeignKey("ShoppingCart.Models.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ShoppingCart.Models.Item", b =>
                 {
                     b.HasOne("ShoppingCart.Models.Cart", "Cart")
@@ -104,11 +75,6 @@ namespace ShoppingCart.Migrations
             modelBuilder.Entity("ShoppingCart.Models.Cart", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("ShoppingCart.Models.User", b =>
-                {
-                    b.Navigation("cart");
                 });
 #pragma warning restore 612, 618
         }

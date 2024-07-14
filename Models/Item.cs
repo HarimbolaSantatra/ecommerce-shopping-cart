@@ -21,13 +21,6 @@ public class Item {
     public int CartId { get; set; } // Foreign key
     public Cart Cart { get; set; } = null; // Reference to the parent
 
-    public Item(string productName, int price)
-    {
-	this.ProductName = productName;
-	this.Price = price;
-    }
-
-
     public virtual bool Equals(Item? obj) =>
 	obj != null && this.ProductCatalogueId.Equals(obj.ProductCatalogueId);
 

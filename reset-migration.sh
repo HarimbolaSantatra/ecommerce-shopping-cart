@@ -16,6 +16,3 @@ echo "===== Recreating migrations ..."
 migration_name="InitialCreate"
 dotnet ef migrations add $migration_name
 dotnet ef database update
-
-echo "==== Recreating the initial user ..."
-mariadb -u $username -p${passwd} $db -e "INSERT INTO User (Username) VALUES ('santatra')"
