@@ -9,6 +9,14 @@ public class AccountClient : IAccountClient {
     public AccountClient()
     {}
 
+    // Test if the 'Account' service is working
+    public async Task<string> TestService()
+    {
+	HttpResponseMessage response= await _client.GetAsync($"{BaseUrl}/status");
+	string jsonResponse = await response.Content.ReadAsStringAsync();
+	return jsonResponse;
+    }
+
     public async Task<string> GetAccount(int userId)
     {
 	// GET - account/<userId>

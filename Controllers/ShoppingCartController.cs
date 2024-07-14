@@ -33,7 +33,7 @@ public class ShoppingCartController
     {
 	var res = new Dictionary<String, String>();
 	res.Add("status", "ShoppingCart microservice is working!");
-	string account_test = await _accountClient.GetAccount(1);
+	string account_test = await _accountClient.TestService();
 	res.Add("account_test", account_test);
 	return new JsonResult(res);
     }
