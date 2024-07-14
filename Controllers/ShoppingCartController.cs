@@ -40,6 +40,19 @@ public class ShoppingCartController
 
 
     /// <summary>
+    /// Test the status of the 'Cart' microservice
+    /// </summary>
+    /// <returns>
+    /// string
+    /// </returns>
+    [HttpGet("status")]
+    public string GetStatus()
+    {
+	return "ShoppingCart microservice is working!";
+    }
+
+
+    /// <summary>
     /// Get a user's cart
     /// </summary>
     /// <returns>
