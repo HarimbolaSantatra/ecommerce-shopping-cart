@@ -12,18 +12,34 @@ public class AccountClient : IAccountClient {
     // Test if the 'Account' service is working
     public async Task<string> TestService()
     {
-	HttpResponseMessage response= await _client.GetAsync($"{BaseUrl}/status");
-	string jsonResponse = await response.Content.ReadAsStringAsync();
+	string jsonResponse;
+	try
+	{
+	    HttpResponseMessage response= await _client.GetAsync($"{BaseUrl}/status");
+	    jsonResponse = await response.Content.ReadAsStringAsync();
+	}
+	catch
+	{
+	    jsonResponse = "Account services not ready!";
+	}
 	return jsonResponse;
     }
 
     public async Task<string> GetAccount(int userId)
     {
 	// GET - account/<userId>
-	HttpResponseMessage response= await _client.GetAsync($"{BaseUrl}/account/{userId}");
-	// response.EnsureSuccessStatusCode().WriteRequestToConsole();
-	string jsonResponse = await response.Content.ReadAsStringAsync();
-	Console.WriteLine($"{jsonResponse}\n");
+	string jsonResponse;
+	try
+	{
+	    HttpResponseMessage response= await _client.GetAsync($"{BaseUrl}/account/{userId}");
+	    // response.EnsureSuccessStatusCode().WriteRequestToConsole();
+	    jsonResponse = await response.Content.ReadAsStringAsync();
+	    Console.WriteLine($"{jsonResponse}\n");
+	}
+	catch (HttpRequestException e)
+	{
+	    jsonResponse = "Account services not ready!";
+	}
 	return jsonResponse;
     }
 
