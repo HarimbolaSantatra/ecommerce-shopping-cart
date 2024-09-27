@@ -1,6 +1,6 @@
 - add accountclient as HttpClient
 
-- Setup dev environment with docker
+- Setup dev environment with docker and add Dockerfile and documentation
 - remove prefix for api url
 - rename database to cart_microservice: change in AppDbContext, reset-migration.sh
 - dev/addItem : controller AddItems - add item for a user's shoppingCart

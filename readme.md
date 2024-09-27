@@ -1,6 +1,7 @@
 # ECOMMERCE SHOPPING CART MICROSERVICE
-ShoppingCart services for the [ecommerce microservices][1].
-Master repo is [here](https://github.com/HarimbolaSantatra/gammerlgaard-shopping-cart).
+ShoppingCart service for the [ecommerce microservices][1].
+
+The *Shopping Cart* service handle a user's cart.
 
 ## SETUP DEVELOPMENT ENVIRONMENT
 ### Dotnet
@@ -22,12 +23,11 @@ Endpoint | HTTP Method | Description | Method name
 `<userId>/items` | post | Add multiple items to a user cart | AddItems
 
 ### Body data
+wip
 
 ### About the project
 - Database: mariadb
 - Database name: *account_microservice*
-
-
 
 ## RESOURCES
 - [Containerize a .NET app](https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux&pivots=dotnet-8-0)
