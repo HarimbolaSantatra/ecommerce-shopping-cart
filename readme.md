@@ -28,7 +28,7 @@ wip
 
 ### About the project
 - Database: mariadb
-- Database name: *account_microservice*
+- Database name: *shopping_cart*
 
 ## RESOURCES
 - [Containerize a .NET app](https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux&pivots=dotnet-8-0)

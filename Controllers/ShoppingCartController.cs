@@ -3,7 +3,6 @@ namespace ShoppingCart.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 using ShoppingCart.Models;
-using ShoppingCart.Utils;
 
 using System.Linq;
 
