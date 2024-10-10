@@ -22,10 +22,10 @@ public class ShoppingCartController
 
 
     /// <summary>
-    /// Declares the endpoint for handling requests
+    /// Check the health of 'ShoppingCart' and the service it depends on
     /// </summary>
     /// <returns>
-    /// Test JSON status
+    /// json
     /// </returns>
     [HttpGet("")]
     public async Task<JsonResult> Index()
@@ -65,6 +65,7 @@ public class ShoppingCartController
     public ActionResult GetUserCart(int userId)
     {
 	var res = new Dictionary<string, object>();
+	int statusCode;
 
 	// TODO: check if the user exist
 
@@ -75,13 +76,17 @@ public class ShoppingCartController
 	if (userCart == null)
 	{
 	    res.Add("status", "empty");
+	    statusCode = 404;
 	}
 	else
 	{
 	    res.Add("status", "exist");
 	    res.Add("cart", _context.Carts);
+	    statusCode = 200;
 	}
-	return new JsonResult(res);
+	JsonResult json = new JsonResult(res);
+	json.StatusCode = statusCode;
+	return json;
     }
 
     /// <summary>
