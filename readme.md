@@ -13,7 +13,8 @@ Visit the [master repo][1] to view instructions.
 ## API USAGE
 ### Exposed endpoint
 
-Here's a list of all exposed endpoint of the API. The base URL is `shoppingcart`.
+A full list of all exposed endpoint can be found in the swagger URL `/swagger`.
+
 Endpoint | HTTP Method | Description | Method name
 --- | --- | --- | ---
 `/` | get | Test if the Cart service and the others services it depends on are working | Index

@@ -23,7 +23,7 @@ public class ShoppingCartController
 
 
     /// <summary>
-    /// Declares the endpoint for handling requests to /shoppingcart/
+    /// Declares the endpoint for handling requests
     /// </summary>
     /// <returns>
     /// Test JSON status
@@ -91,6 +91,16 @@ public class ShoppingCartController
     /// <returns>
     /// The JSON representation of the created Cart object
     /// </returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /Todo
+    ///     {
+    ///         "Id": 1,
+    ///         "UserId": 1
+    ///     }
+    ///
+    /// </remarks>
     [HttpPost("cart")]
     public ActionResult AddCart (Cart cart)
     {
