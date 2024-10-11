@@ -19,6 +19,7 @@ public class Cart
     public List<Item> Items { get; } = new List<Item>();
 
     // for one-to-one relationship
+    // a Cart doesn't exists without a UserId
     public int UserId { get; set; }
 
     /// <summary>

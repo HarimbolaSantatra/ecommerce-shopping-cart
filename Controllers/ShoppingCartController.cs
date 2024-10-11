@@ -89,6 +89,12 @@ public class ShoppingCartController
 	return json;
     }
 
+    /// Check if a user with id 'userId' have a cart
+    public bool UserHasCart (int userId)
+    {
+	return _context.Carts.Any(cart => cart.UserId == userId);
+    }
+
     /// <summary>
     /// Add a cart for a user
     /// </summary>
@@ -110,6 +116,16 @@ public class ShoppingCartController
     {
 
 	Dictionary<string, object> res = new Dictionary<string, object>();
+	JsonResult json;
+
+	// check if user already has a cart
+	if (UserHasCart(cart.UserId))
+	{
+	    res.Add("operation", "duplicate cart");
+	    json = new JsonResult(res);
+	    json.StatusCode = 204;
+	    return json;
+	}
 
 	// Get the cart
 	var carts = _context.Carts;
@@ -119,9 +135,65 @@ public class ShoppingCartController
 
 	res.Add("operation", "updated");
 	res.Add("cart", cart.Serialize());
+	json = new JsonResult(res);
+	json.StatusCode = 200;
 
-	return new JsonResult(res);
+	return json;
     }
 
+
+    /// <summary>
+    /// Add items to a user's cart
+    /// </summary>
+    /// <param name="cartId">The id of a Cart object (int)</param>
+    /// <param name="itemsIds">A list of Item.Id</param>
+    /// <returns>
+    /// Json Result
+    /// </returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /Todo
+    ///     {
+    ///         "cartId": 1,
+    ///         "items": { 
+    ///     }
+    ///
+    /// </remarks>
+    [HttpPost("items")]
+    public JsonResult AddItems(int cartId, List<int> itemsIds)
+    {
+	Dictionary<string, object> res = new Dictionary<string, object>();
+	JsonResult json;
+
+	var cart = _context.Carts.SingleOrDefault(cart => cart.Id == cartId);
+	if (cart == null)
+	{
+	    res.Add("status", $"Cart id {cartId} does not exists!");
+	    json = new JsonResult(res);
+	    json.StatusCode = 404;
+	    return json;
+	}
+
+	// check if user already has a cart
+	if (!UserHasCart(cart.UserId))
+	{
+	    res.Add("status", "User doesn't have a cart!");
+	    json = new JsonResult(res);
+	    json.StatusCode = 404;
+	    return json;
+	}
+
+	List<Item> items = _context.Items.ToList();
+	IEnumerable<Item> filteredItem = items.Where(item => itemsIds.Contains(item.Id));
+
+	foreach (Item item in filteredItem)
+	{
+	    cart.Items.Add(item);
+	}
+	_context.SaveChanges();
+	json = new JsonResult(res);
+	return json;
+    }
 
 }
