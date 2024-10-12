@@ -6,15 +6,18 @@ using ShoppingCart.Models;
 
 using System.Linq;
 
+/// <summary>
+/// Main Controller
+/// </summary>
 [ApiController]
 [Route("/")]
-public class ShoppingCartController
+public class CartController
 {
 
     private readonly AppDbContext _context;
     public IAccountClient _accountClient;
 
-    public ShoppingCartController(AppDbContext context, IAccountClient accountClient)
+    public CartController(AppDbContext context, IAccountClient accountClient)
     {
 	_context = context;
 	_accountClient = accountClient;
@@ -22,7 +25,7 @@ public class ShoppingCartController
 
 
     /// <summary>
-    /// Check the health of 'ShoppingCart' and the service it depends on
+    /// Check the health of the service and these which it depends on
     /// </summary>
     /// <returns>
     /// json
@@ -31,7 +34,7 @@ public class ShoppingCartController
     public async Task<JsonResult> Index()
     {
 	var res = new Dictionary<String, String>();
-	res.Add("status", "ShoppingCart microservice is working!");
+	res.Add("status", "Cart service is working!");
 	ObjectResult objectResult = await _accountClient.TestService();
 	res.Add("account_test", objectResult.Value.ToString());
 
@@ -39,19 +42,6 @@ public class ShoppingCartController
 	JsonResult jsonResult = new JsonResult(res);
 	jsonResult.StatusCode = objectResult.StatusCode;
 	return jsonResult;
-    }
-
-
-    /// <summary>
-    /// Test the status of the 'Cart' microservice
-    /// </summary>
-    /// <returns>
-    /// string
-    /// </returns>
-    [HttpGet("status")]
-    public string GetStatus()
-    {
-	return "ShoppingCart microservice is working!";
     }
 
 

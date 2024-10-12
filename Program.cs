@@ -15,8 +15,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Cart Service",
-        Description = "The Shopping Cart service of the ecommerce microservices.",
+        Title = "Music Streaming Backend service",
+        Description = "The back service of the music streaming microservices.",
         Contact = new OpenApiContact
         {
             Name = "Santatra",

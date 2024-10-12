@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-db="shopping_cart"
+db="music_stream"
 username="root"
 passwd="root"
 
