@@ -4,8 +4,11 @@ ShoppingCart service for the [ecommerce microservices][1].
 The *Shopping Cart* service handle a user's cart.
 
 ## SETUP DEVELOPMENT ENVIRONMENT
-### Dotnet
-To simply run it on dotnet CLI: `dotnet run`.
+- To simply run it on dotnet CLI: `dotnet run`.
+- Using Docker:
+
+    docker build -t cart-svc .
+    docker run -it -d --rm --name cart-svc cart-svc
 
 ## SETUP PRODUCTION ENVIRONMENT
 Visit the [master repo][1] to view instructions.
