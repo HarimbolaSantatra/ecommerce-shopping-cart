@@ -44,7 +44,7 @@ public class AccountClient : IAccountClient {
 	}
 	catch (HttpRequestException e)
 	{
-	    response = "Account services not ready!";
+	    response = $"Account services not ready! Error: {e.Message}";
 	    statusCode = 500;
 	}
 	ObjectResult res = new ObjectResult(response);
@@ -72,7 +72,7 @@ public class AccountClient : IAccountClient {
 	}
 	catch (HttpRequestException e)
 	{
-	    jsonResponse = "Account services not ready!";
+	    jsonResponse = $"Account services not ready! Error: {e.Message}";
 	}
 	return jsonResponse;
     }
