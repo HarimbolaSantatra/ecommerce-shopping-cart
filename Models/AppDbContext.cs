@@ -6,7 +6,8 @@ public class AppDbContext : DbContext
 {
 
     public DbSet<Cart> Carts { get; set; }
-    public DbSet<Item> Items { get; set; }
+    public DbSet<Song> Songs { get; set; }
+    public DbSet<Artist> Artists { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
     {
