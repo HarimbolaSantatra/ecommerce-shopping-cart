@@ -33,7 +33,7 @@ public class ArtistController
     public JsonResult GetArtist(int artistId)
     {
 	JsonResult json;
-	var artists = _context.Artists.SingleOrDefault(artist => artist.Id == artistId);
+	var artists = _context.Artists.ToList().SingleOrDefault(artist => artist.Id == artistId);
 	json = new JsonResult(artists);
 	json.StatusCode = artists == null ? 404 : 200; 
 	return json;

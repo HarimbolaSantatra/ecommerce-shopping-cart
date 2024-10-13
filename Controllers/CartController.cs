@@ -10,7 +10,7 @@ using System.Linq;
 /// Main Controller
 /// </summary>
 [ApiController]
-[Route("/")]
+[Route("/cart")]
 public class CartController
 {
 

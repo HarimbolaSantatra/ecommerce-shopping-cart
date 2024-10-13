@@ -7,7 +7,8 @@ public class Song
 {
     public int Id { get; set; }
     public String Title { get; set; }
-    public Artist Artist { get; set; }
+    public List<Artist> Artists { get; set; } = [];
+    public List<Cart> Carts { get; set; } = [];
 
     public Song() {}
 }
